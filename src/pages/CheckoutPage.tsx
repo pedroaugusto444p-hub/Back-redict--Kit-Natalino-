@@ -1,14 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "motion/react";
-import { CheckCircle, Copy, Clock, ShieldCheck, ArrowLeft, Loader2 } from "lucide-react";
+import {
+  CheckCircle,
+  Copy,
+  Clock,
+  ShieldCheck,
+  ArrowLeft,
+  Loader2,
+} from "lucide-react";
 import { toast } from "../hooks/use-toast";
 
 export default function CheckoutPage() {
   const [copied, setCopied] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(600); // 10 minutes
-  const [paymentStatus, setPaymentStatus] = useState<"pending" | "confirming" | "success">("pending");
+  const [timeLeft, setTimeLeft] = useState(600);
+  const [paymentStatus, setPaymentStatus] = useState<
+    "pending" | "confirming" | "success"
+  >("pending");
 
-  const pixKey = "00020101021126580014br.gov.bcb.pix0136megapackstl-payment-key-pix-99052040000530398654049.905802BR5913Mega Pack STL6009SAO PAULO62070503***6304A1B2";
+  const pixKey =
+    "00020101021126580014br.gov.bcb.pix0136kitpequenoscriativos-pix-990520400005303986540514.905802BR5922Kit Pequenos Criativos6009SAO PAULO62070503***6304A1B2";
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -17,7 +27,6 @@ export default function CheckoutPage() {
     return () => clearInterval(timer);
   }, []);
 
-  // Simulate payment confirmation after 8 seconds
   useEffect(() => {
     const confirmTimer = setTimeout(() => {
       setPaymentStatus("confirming");
@@ -25,8 +34,9 @@ export default function CheckoutPage() {
         setPaymentStatus("success");
         toast({
           title: "Pagamento Confirmado!",
-          description: "Seu acesso ao Mega Pack STL foi liberado com sucesso.",
-          className: "bg-green-600 text-white border-none",
+          description:
+            "Seu acesso ao Kit Pequenos Criativos foi liberado com sucesso.",
+          className: "bg-emerald-600 text-white border-none",
         });
       }, 3000);
       return () => clearTimeout(successTimer);
@@ -52,55 +62,66 @@ export default function CheckoutPage() {
   };
 
   return (
-    <div className="min-h-screen bg-neutral-50 flex flex-col font-sans">
-      <header className="bg-white border-b border-neutral-200 py-4 px-6 shadow-sm">
-        <div className="max-w-4xl mx-auto flex items-center justify-between">
-          <a href="/" className="flex items-center gap-2 text-neutral-600 hover:text-neutral-900 transition-colors text-sm font-bold uppercase">
+    <div className="min-h-screen bg-[#FAFAFA] flex flex-col">
+      <header className="bg-white border-b border-slate-200 py-4 px-6">
+        <div className="max-w-4xl mx-auto flex items-center justify-between gap-4">
+          <a
+            href="/"
+            className="flex items-center gap-2 text-slate-600 hover:text-slate-900 transition-colors text-sm font-bold whitespace-nowrap shrink-0"
+          >
             <ArrowLeft className="w-4 h-4" /> Voltar
           </a>
-          <span className="font-black text-red-700 text-lg tracking-tight uppercase">Natal Criativo para Imprimir</span>
-          <div className="flex items-center gap-1.5 text-xs text-neutral-500 font-semibold bg-neutral-100 px-3 py-1.5 rounded-full">
-            <ShieldCheck className="w-4 h-4 text-emerald-600" /> Seguro
+          <span className="font-extrabold text-slate-900 text-base sm:text-lg tracking-tight whitespace-nowrap shrink-0">
+            Kit Pequenos Criativos
+          </span>
+          <div className="flex items-center gap-1.5 text-xs text-slate-600 font-semibold whitespace-nowrap shrink-0">
+            <ShieldCheck className="w-4 h-4 text-emerald-600" />
+            <span>Compra Segura</span>
           </div>
         </div>
       </header>
 
       <main className="flex-grow container max-w-xl mx-auto px-4 py-8 flex flex-col items-center justify-center">
         <motion.div
-          initial={{ opacity: 0, y: 15 }}
+          initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          className="w-full bg-white rounded-2xl shadow-xl border border-neutral-100 p-6 md:p-8 space-y-6"
+          className="w-full bg-white rounded-2xl shadow-lg border border-slate-200 p-6 md:p-8 space-y-6"
         >
           {paymentStatus !== "success" ? (
             <>
-              {/* Header */}
               <div className="text-center space-y-2">
-                <h1 className="text-2xl font-black text-neutral-900 uppercase tracking-tight">
+                <h1 className="text-2xl font-extrabold text-slate-950 tracking-tight">
                   Finalize seu Pagamento
                 </h1>
-                <p className="text-sm text-neutral-500">
-                  Escaneie o QR Code ou copie o código Pix abaixo para liberar seu acesso.
+                <p className="text-sm text-slate-600">
+                  Escaneie o QR Code ou copie o código Pix abaixo para liberar
+                  seu acesso.
                 </p>
               </div>
 
-              {/* Price Banner */}
-              <div className="bg-emerald-50 rounded-xl p-4 flex justify-between items-center border border-emerald-200/50">
+              <div className="bg-emerald-50 rounded-xl p-4 flex justify-between items-center border border-emerald-200">
                 <div>
-                  <p className="text-xs font-bold text-emerald-800 uppercase tracking-wider">Plano Completo (50% OFF)</p>
-                  <p className="text-xs text-emerald-700">Natal Criativo para Imprimir (5 Módulos + 2 Bônus)</p>
+                  <p className="text-xs font-bold text-emerald-800 uppercase tracking-wider">
+                    Oferta Especial de Saída
+                  </p>
+                  <p className="text-xs text-emerald-700">
+                    Kit Pequenos Criativos (+200 Atividades + 4 Bônus)
+                  </p>
                 </div>
-                <div className="text-right">
-                  <p className="text-2xl font-black text-emerald-600">R$ 14,90</p>
+                <div className="text-right tabular-nums">
+                  <p className="text-2xl font-extrabold text-emerald-700">
+                    R$ 14,90
+                  </p>
                 </div>
               </div>
 
-              {/* QR Code Placeholder */}
-              <div className="flex flex-col items-center justify-center py-4 bg-neutral-50 rounded-xl border border-dashed border-neutral-200 relative overflow-hidden group">
-                <div className="bg-white p-4 rounded-lg shadow-md border border-neutral-100">
-                  {/* Dynamic simulated QR code */}
-                  <svg className="w-44 h-44 text-neutral-900" viewBox="0 0 100 100">
+              <div className="flex flex-col items-center justify-center py-5 bg-slate-50 rounded-xl border border-dashed border-slate-300">
+                <div className="bg-white p-4 rounded-lg shadow-sm border border-slate-200">
+                  <svg
+                    className="w-44 h-44 text-slate-900"
+                    viewBox="0 0 100 100"
+                  >
                     <rect width="100" height="100" fill="white" />
-                    {/* QR Code corners */}
                     <rect x="5" y="5" width="25" height="25" fill="currentColor" />
                     <rect x="8" y="8" width="19" height="19" fill="white" />
                     <rect x="11" y="11" width="13" height="13" fill="currentColor" />
@@ -113,7 +134,6 @@ export default function CheckoutPage() {
                     <rect x="8" y="73" width="19" height="19" fill="white" />
                     <rect x="11" y="76" width="13" height="13" fill="currentColor" />
 
-                    {/* Random QR patterns */}
                     <rect x="35" y="5" width="5" height="10" fill="currentColor" />
                     <rect x="45" y="15" width="15" height="5" fill="currentColor" />
                     <rect x="35" y="25" width="10" height="5" fill="currentColor" />
@@ -132,25 +152,23 @@ export default function CheckoutPage() {
                   </svg>
                 </div>
 
-                {/* Status Overlay */}
-                <div className="mt-4 flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-neutral-500">
+                <div className="mt-4 flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-600">
                   {paymentStatus === "pending" ? (
                     <>
-                      <Loader2 className="w-4 h-4 animate-spin text-red-600" />
+                      <Loader2 className="w-4 h-4 animate-spin text-blue-600" />
                       Aguardando pagamento...
                     </>
                   ) : (
                     <>
-                      <Loader2 className="w-4 h-4 animate-spin text-green-600" />
+                      <Loader2 className="w-4 h-4 animate-spin text-emerald-600" />
                       Confirmando transação...
                     </>
                   )}
                 </div>
               </div>
 
-              {/* Copia e Cola Section */}
               <div className="space-y-2">
-                <label className="text-xs font-bold text-neutral-500 uppercase tracking-wider block">
+                <label className="text-xs font-bold text-slate-600 uppercase tracking-wider block">
                   Pix Copia e Cola
                 </label>
                 <div className="flex gap-2">
@@ -158,77 +176,98 @@ export default function CheckoutPage() {
                     type="text"
                     readOnly
                     value={pixKey}
-                    className="flex-grow h-11 px-3 bg-neutral-50 border border-neutral-200 rounded-lg text-xs font-mono text-neutral-600 focus:outline-none select-all"
+                    className="flex-grow h-11 px-3 bg-slate-50 border border-slate-200 rounded-lg text-xs font-mono text-slate-700 focus:outline-none select-all"
                   />
                   <button
+                    type="button"
                     onClick={handleCopy}
-                    className="h-11 px-4 bg-neutral-900 hover:bg-neutral-800 text-white rounded-lg flex items-center justify-center gap-2 font-bold text-sm transition-colors shrink-0"
+                    className="h-11 px-4 bg-slate-900 hover:bg-slate-800 text-white rounded-lg flex items-center justify-center gap-2 font-bold text-sm transition-colors shrink-0"
                   >
-                    {copied ? "Copiado!" : <><Copy className="w-4 h-4" /> Copiar</>}
+                    {copied ? (
+                      "Copiado!"
+                    ) : (
+                      <>
+                        <Copy className="w-4 h-4" /> Copiar
+                      </>
+                    )}
                   </button>
                 </div>
               </div>
 
-              {/* Timer & Security */}
-              <div className="flex items-center justify-between pt-4 border-t border-neutral-100 text-xs font-semibold text-neutral-400">
+              <div className="flex items-center justify-between pt-4 border-t border-slate-100 text-xs font-semibold text-slate-500 tabular-nums">
                 <span className="flex items-center gap-1">
-                  <Clock className="w-4 h-4 text-red-500" />
-                  Expira em: <span className="text-red-500 font-bold">{formatTime(timeLeft)}</span>
+                  <Clock className="w-4 h-4 text-red-600" />
+                  Expira em:{" "}
+                  <span className="text-red-600 font-bold">
+                    {formatTime(timeLeft)}
+                  </span>
                 </span>
                 <span className="flex items-center gap-1">
-                  <ShieldCheck className="w-4 h-4 text-green-500" />
-                  Ambiente 100% Criptografado
+                  <ShieldCheck className="w-4 h-4 text-emerald-600" />
+                  Ambiente Criptografado
                 </span>
               </div>
             </>
           ) : (
-            // Success Screen
             <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
+              initial={{ opacity: 0, scale: 0.96 }}
               animate={{ opacity: 1, scale: 1 }}
               className="text-center py-6 space-y-6"
             >
-              <div className="mx-auto bg-green-100 p-4 rounded-full w-fit text-green-600">
-                <CheckCircle className="w-16 h-16 animate-bounce" />
+              <div className="mx-auto bg-emerald-100 p-4 rounded-full w-fit text-emerald-600">
+                <CheckCircle className="w-16 h-16" />
               </div>
 
               <div className="space-y-2">
-                <h2 className="text-3xl font-black text-neutral-900 uppercase tracking-tight">
+                <h2 className="text-3xl font-extrabold text-slate-950 tracking-tight">
                   Acesso Liberado!
                 </h2>
-                <p className="text-emerald-700 font-bold text-sm bg-emerald-50 py-1.5 px-4 rounded-full inline-block">
+                <p className="text-emerald-700 font-bold text-sm">
                   Pagamento via Pix confirmado instantaneamente
                 </p>
               </div>
 
-              <p className="text-neutral-600 text-sm md:text-base leading-relaxed max-w-sm mx-auto">
-                Parabéns! Seu acesso imediato ao material <span className="font-bold text-neutral-900">Natal Criativo para Imprimir</span> (5 módulos + 2 bônus especiais) já está liberado.
+              <p className="text-slate-600 text-sm md:text-base leading-relaxed max-w-sm mx-auto">
+                Parabéns! Seu acesso ao material{" "}
+                <span className="font-bold text-slate-900">
+                  Kit Pequenos Criativos
+                </span>{" "}
+                (5 módulos + 4 bônus especiais) já está liberado.
               </p>
 
-              <div className="bg-neutral-50 border border-neutral-100 rounded-xl p-5 text-left space-y-3">
-                <p className="text-xs font-bold text-neutral-400 uppercase tracking-wider">Seus dados de acesso:</p>
-                <div className="space-y-1 text-sm text-neutral-700 font-medium">
-                  <p>🔑 <span className="text-neutral-500">Usuário:</span> {navigator.userAgent.includes("Chrome") ? "seu-email@exemplo.com" : "cadastrado@pix.com"}</p>
-                  <p>🎁 <span className="text-neutral-500">Conteúdo:</span> Natal Criativo para Imprimir - Plano Completo</p>
+              <div className="bg-slate-50 border border-slate-200 rounded-xl p-5 text-left space-y-2">
+                <p className="text-xs font-bold text-slate-500 uppercase tracking-wider">
+                  Seus dados de acesso:
+                </p>
+                <div className="space-y-1 text-sm text-slate-700 font-medium">
+                  <p>
+                    <span className="text-slate-500">Conteúdo:</span> Kit
+                    Pequenos Criativos - Kit Completo em PDF
+                  </p>
+                  <p>
+                    <span className="text-slate-500">Garantia:</span> 7 dias
+                    para reembolso
+                  </p>
                 </div>
               </div>
 
               <div className="pt-2">
-                <a
-                  href="#"
-                  onClick={(e) => {
-                    e.preventDefault();
+                <button
+                  type="button"
+                  onClick={() => {
                     toast({
                       title: "Acesso liberado!",
-                      description: "Os arquivos digitais foram enviados para seu e-mail cadastrado.",
+                      description:
+                        "Os arquivos digitais em PDF foram enviados para seu e-mail cadastrado.",
                     });
                   }}
-                  className="w-full h-14 bg-emerald-600 hover:bg-emerald-700 text-white font-black text-lg rounded-xl flex items-center justify-center gap-2 shadow-lg transition-all active:scale-[0.98] cursor-pointer"
+                  className="w-full h-14 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-base rounded-xl flex items-center justify-center gap-2 shadow-sm transition-colors cursor-pointer"
                 >
-                  🚀 BAIXAR MINHA COLEÇÃO AGORA
-                </a>
-                <p className="text-xs text-neutral-400 mt-3">
-                  * Você também receberá uma cópia do link de download em seu e-mail.
+                  BAIXAR MEU KIT COMPLETO AGORA
+                </button>
+                <p className="text-xs text-slate-500 mt-3">
+                  Você também receberá uma cópia do link de download em seu
+                  e-mail.
                 </p>
               </div>
             </motion.div>
@@ -236,10 +275,10 @@ export default function CheckoutPage() {
         </motion.div>
       </main>
 
-      <footer className="bg-neutral-100 border-t border-neutral-200 py-6 mt-8">
-        <div className="container mx-auto px-4 text-center text-xs text-neutral-400 space-y-2">
-          <p>&copy; 2026 Natal Criativo para Imprimir. Todos os direitos reservados.</p>
-          <p>Dúvidas? Entre em contato com nosso suporte.</p>
+      <footer className="bg-white border-t border-slate-200 py-6 mt-8">
+        <div className="container mx-auto px-4 text-center text-xs text-slate-500 space-y-2">
+          <p>© 2026 Kit Pequenos Criativos. Todos os direitos reservados.</p>
+          <p>Material digital de atividades infantis em PDF para impressão.</p>
         </div>
       </footer>
     </div>
